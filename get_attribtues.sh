@@ -22,6 +22,7 @@ fi
 # debug
 read pricingdata
 (>&2 echo $pricingdata)
+exit 1
 
 # STDIN is the pricing data for the product, but we want the attributes
 echo $pricingdata | jq -c '.product.attributes'
