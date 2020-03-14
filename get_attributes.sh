@@ -21,7 +21,8 @@ fi
 
 # debug
 read pricingdata
-(>&2 echo $pricingdata)
+echo $pricingdata
+echo $pricingdata >&2
 exit 1
 
 # STDIN is the pricing data for the product, but we want the attributes
