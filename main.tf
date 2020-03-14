@@ -40,6 +40,6 @@ data "aws_pricing_product" "selected" {
 }
 
 data "external" "selected" {
-  program = ["sh", "${path.module}/scripts/get-redshift-leader-node.sh"]
+  program = ["sh", "${path.module}/get_attributes.sh"]
   query   = "${data.aws_pricing_product.selected.result}"
 }
