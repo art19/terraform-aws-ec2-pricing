@@ -21,7 +21,10 @@ fi
 
 # debug
 read pricingdata
+echo "PRICING DATA:"
 echo $pricingdata
+
+echo "PRICING DATA:" >&2
 echo $pricingdata >&2
 exit 1
 
