@@ -19,5 +19,10 @@ if ! [[ $(command -v jq) ]]; then
   exit 1
 fi
 
+# debug
+read pricingdata
+(>&2 echo $pricingdata)
+exit 1
+
 # STDIN is the pricing data for the product, but we want the attributes
-jq -c '.product.attributes'
+echo $pricingdata | jq -c '.product.attributes'
