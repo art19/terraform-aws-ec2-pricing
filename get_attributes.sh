@@ -19,10 +19,9 @@ if ! [[ $(command -v jq) ]]; then
   exit 1
 fi
 
-# debug
-read pricingdata
-echo $pricingdata > /tmp/pricing_data.txt
-exit 1
+# Extract the product from arguments, strip any CRs
+JQ_OUTPUT="$(jq -r '@sh "PRODUCT=\(.product)"')"
+eval "${JQ_OUTPUT//$'\r'/}"
 
-# STDIN is the pricing data for the product, but we want the attributes
-echo $pricingdata | jq -c '.product.attributes'
+# $PRODUCT is the pricing data for the product, but we want the attributes
+echo $PRODUCT | jq -c '.product.attributes'
