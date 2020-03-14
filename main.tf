@@ -1,13 +1,11 @@
-locals {
-  attributes = jsondecode(data.aws_pricing_product.selected.result).product.attributes
-}
-
 data "aws_pricing_product" "selected" {
+  provider = "aws.terraform-aws-ec2-pricing"
+
   service_code = "AmazonEC2"
 
   filters {
     field = "instanceType"
-    value = var.instance_type
+    value = "${var.instance_type}"
   }
 
   filters {
@@ -39,4 +37,9 @@ data "aws_pricing_product" "selected" {
     field = "capacitystatus"
     value = "Used"
   }
+}
+
+data "external" "selected" {
+  program = ["sh", "${path.module}/scripts/get-redshift-leader-node.sh"]
+  query   = "${data.aws_pricing_product.selected.result}"
 }

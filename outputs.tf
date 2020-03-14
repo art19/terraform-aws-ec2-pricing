@@ -1,9 +1,9 @@
 output "cpus" {
-  value = parseint(local.attributes.vcpu, 10)
+  value       = "${data.external.selected.result["vcpu"] * 1}"
   description = "Number of CPU cores available on the instance"
 }
 
 output "memory" {
-  value = tonumber(regex("((0.)?\\d+) GiB", local.attributes.memory)[0])
+  value       = "${replace(data.external.selected.result["memory"], " GiB", "") * 1}"
   description = "Memory available on the instance, in gibibytes (GiB)"
 }
